@@ -7,7 +7,7 @@ model = SentenceTransformer(
     "all-MiniLM-L6-v2", device="cpu"
 )
 
-df = pd.read_json("./csvjson.json")
+df = pd.read_json("./steam.json", orient="records")
 
 vectors = model.encode(
     [row.name for row in df.itertuples()],

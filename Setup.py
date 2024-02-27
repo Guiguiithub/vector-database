@@ -13,7 +13,7 @@ qdrant_client.recreate_collection(
     vectors_config=VectorParams(size=384, distance=Distance.EUCLID),
 )
 
-fd = open("./steam.json")
+fd = open("./steam.json", encoding="utf-8")
 
 payload = map(json.loads, fd)
 
