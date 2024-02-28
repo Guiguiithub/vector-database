@@ -10,7 +10,7 @@ model = SentenceTransformer(
 df = pd.read_json("./steam.json", orient="records")
 
 vectors = model.encode(
-    [row.name for row in df.itertuples()],
+    [row.name+". " + row.categories for row in df.itertuples()],
     show_progress_bar=True
 )
 
