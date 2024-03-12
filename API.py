@@ -28,3 +28,7 @@ class NeuralSearcher:
             result['score'] = hit.score
             results.append(result)
         return results
+
+    def get_all_data(self) -> List[dict]:
+        # Use an empty string as the query to retrieve all documents
+        return self.search(text="", filter_=None)
