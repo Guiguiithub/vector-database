@@ -35,9 +35,9 @@ You can find the extended version in the [qdrant website](https://qdrant.tech/).
 1. Install the needed packages via ```pip install``` :
  - qdrant-client
  - pandas
- - numpy (1.26.4)
+ - numpy (1.24.2)
  - fastapi
- - sentence-transformer
+ - sentence-transformers
  - httpx (0.26.0)
  - httpcore (1.0.3)
 2. 
