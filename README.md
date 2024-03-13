@@ -55,7 +55,9 @@ client = QdrantClient(
     timeout=60
 )
 ``
+
 2. AttributeError: module 'httpcore' has no attribute 'CloseError'
 
 This error is a problem of package, be sure to install the correct version of packages in the requirements (no version = latest version)
-3. 
+
+3.
