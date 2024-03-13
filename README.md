@@ -30,20 +30,33 @@ You can find the extended version in the [qdrant website](https://qdrant.tech/).
 ![Image01.png](Documents/Images/Image01.png)
 5. Now you can access everytime to the UI pannel. Don't forget to always run the docker before going to the website.
 
-## Access with Python client
+## Setup
 
-1. Install the needed packages via ```pip install``` :
- - qdrant-client
- - pandas
- - numpy (1.24.2)
- - fastapi
- - sentence-transformers
- - httpx (0.26.0)
- - httpcore (1.0.3)
-2. 
+Install the needed packages via the [requirements.txt](requirements.txt)
+
+### Preparation and uploading of the dataset/collection
+
+You can create your own dataset manually by following this [guide](https://qdrant.tech/documentation/quick-start/#create-a-collection), but for our project we decided to find a dataset online already made, for exemple, in [kaggle](https://www.kaggle.com/datasets)
+
+The dataset we choose is the [steam dataset](https://www.kaggle.com/datasets/deepann/80000-steam-games-dataset?resource=download) and it gives us a .csv and a .json. We extract the .json and put it in ``Data/RawData`` then we run the code [datasetPreparation.py](Code/datasetPreparation.py) (make sure to do the necessary path correction). Once the code is finalized, make sure to run the qdrant docker before continuing.
+
+Next, we need to upload the dataset in the vector database and to do that, we gonna run the code [uploadToDb.py](Code/uploadToDb.py).
+
+Once the code is finally done, we can check if our database exist on the [Qdrant UI](http://localhost:6333/dashboard#/collections) and as we can see, our dataset is complete.
+![result01](Documents/Images/result01.png) ![result02](Documents/Images/result02.png)
+
+### Test the research
+
+Once the preparation and the uploading of the dataset is complete, we gonna test the search to find similarities between each vectors.
+
+To do that, we're going to run the [service.py](Code/service.py) and when the application start is complete, then run the [index.html](static/index.html). Normally, your gonna land on this site : ![result03](Documents/Images/result03.png)
+
+If we try to search a game, for exemple, Grand Theft Auto, we have this results : ![result04](Documents/Images/result04.png)
+
+--- add rest here
 
 ## Error handling
-We cross against some errors during the developpement of this project :
+We cross against some errors during the development of this project :
 
 1. qdrant_client.http.exceptions.ResponseHandlingException: timed out
 

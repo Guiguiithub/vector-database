@@ -9,7 +9,7 @@ model = SentenceTransformer(
 )
 
 # Read JSON data into a DataFrame
-with open("./Data/RawData/final_data_new.json", "r") as f:
+with open("../Data/RawData/final_data_new.json", "r") as f:
     data = json.load(f)
 
 # Convert JSON data into DataFrame
