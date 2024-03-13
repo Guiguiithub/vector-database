@@ -5,7 +5,7 @@ from tqdm.notebook import tqdm
 import os.path
 from config import DATA_DIR, TEXT_FIELD_NAME
 
-
+#change
 csv_file_path = os.path.join(DATA_DIR, "./Data/RawData/steam.csv")
 
 model = SentenceTransformer(
