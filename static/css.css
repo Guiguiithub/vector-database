@@ -29,3 +29,7 @@ body {
     border: 1px solid #ccc;
     border-radius: 5px;
 }
+
+.widthMax {
+    max-width: 100%;
+}
