@@ -9,7 +9,7 @@ class NeuralSearcher:
     def __init__(self, collection_name: str):
         self.collection_name = collection_name
         self.model = SentenceTransformer('all-MiniLM-L6-v2')
-        self.qdrant_client = QdrantClient("localhost", port=6333, timeout=60 )
+        self.qdrant_client = QdrantClient("localhost", port=6333)
 
     # search for similar games based on input
     def search(self, text: str, filter_: dict = None) -> List[dict]:
