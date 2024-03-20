@@ -27,7 +27,7 @@ You can find the extended version in the [qdrant website](https://qdrant.tech/).
 3. Run the docker
 ``docker run -p 6333:6333 qdrant/qdrant``
 4. You can access to the website UI of the [docker](http://localhost:6333/dashboard)
-![Image01.png](Images%2FImage01.png)
+![Image01.png](Documents/Images/Image01.png)
 5. Now you can access everytime to the UI pannel. Don't forget to always run the docker before going to the website.
 
 ## Access with Python client
@@ -35,7 +35,29 @@ You can find the extended version in the [qdrant website](https://qdrant.tech/).
 1. Install the needed packages via ```pip install``` :
  - qdrant-client
  - pandas
- - numpy
+ - numpy (1.24.2)
  - fastapi
- - sentence-transformer
+ - sentence-transformers
+ - httpx (0.26.0)
+ - httpcore (1.0.3)
 2. 
+
+## Error handling
+We cross against some errors during the developpement of this project :
+
+1. qdrant_client.http.exceptions.ResponseHandlingException: timed out
+
+This error can be solved by adding a timeout, exemple:
+``
+client = QdrantClient(
+    "localhost",
+    port=6333,
+    timeout=60
+)
+``
+
+2. AttributeError: module 'httpcore' has no attribute 'CloseError'
+
+This error is a problem of package, be sure to install the correct version of packages in the requirements (no version = latest version)
+
+3.
