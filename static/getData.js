@@ -60,8 +60,8 @@ function displayResults(results, number) {
                 <h6 class="card-subtitle mb-2 text-muted">${result.price}</h6>
                 <p class="card-text">${truncDescription(result.full_desc.desc)}</p>
                 <div class="d-flex justify-content-between">
-                    <button class="btn btn-danger"  onclick="addDislike('${result.ident}')" style="visibility: `+findLike(result.ident)+`">👎</button>
-                    <button class="btn btn-success " onclick="addLike('${result.ident}')" style="visibility: `+findDislike(result.ident)+`">👍</button>
+                    <button class="btn btn-danger"  onclick="addDislike('${result.ident}')" style="visibility: ${findLike(result.ident)}" data-name="${result.ident}" data-type="like">👎</button>
+                    <button class="btn btn-success " onclick="addLike('${result.ident}')" style="visibility: ${findDislike(result.ident)}" data-name="${result.ident}" data-type="dislike">👍</button>
                 </div>
               </div>
             </div>
@@ -70,19 +70,14 @@ function displayResults(results, number) {
     });
 }
 
-function findLike(name){
+function findLike(name) {
     let storageItem = JSON.parse(localStorage.getItem('like')) || [];
-    if (storageItem.includes(name)) {
-        return "hidden";
-    }
-    return "visible";
+    return storageItem.includes(name) ? "hidden" : "visible";
 }
-function findDislike(name){
+
+function findDislike(name) {
     let storageItem = JSON.parse(localStorage.getItem('dislike')) || [];
-    if (storageItem.includes(name)) {
-        return "hidden";
-    }
-    return "visible";
+    return storageItem.includes(name) ? "hidden" : "visible";
 }
 
 function addLike(name){
@@ -116,25 +111,6 @@ function updateButtonVisibility(name, type, visible) {
     buttons.forEach(button => {
         button.style.visibility = visible ? 'visible' : 'hidden'; // Set the visibility based on the 'visible' parameter
     });
-}
-async function recommend(){
-    const response = await fetch("http://localhost:8000/api/recommend", {
-        method: 'POST',
-        headers:{
-            'Content-Type':'application/json'
-        },
-        body: JSON.stringify({
-            likeIds: likeIds,
-            dislikeIds: dislikeIds
-        })
-    });
-    if(response.ok){
-        const data = await response.json();
-        displayResults(data, 8);
-    }
-    else {
-        alert("error")
-    }
 }
 
 function truncDescription(description){
