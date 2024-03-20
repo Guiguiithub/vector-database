@@ -39,6 +39,16 @@ def all_startup():
     except Exception as e:
         return {"error": str(e)}
 
+@app.post("/api/recommend")
+def recommend(request: dict):
+    try:
+        liked_ids = request.get("likeIds", [])
+        disliked_ids = request.get("dislikeIds", [])
+
+        result = neural_searcher.recommend(positif=liked_ids, negitif=disliked_ids)
+        return {"result": result}
+    except Exception as e:
+        return {"error": str(e)}
 
 if __name__ == "__main__":
     import uvicorn
