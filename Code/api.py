@@ -18,7 +18,7 @@ class NeuralSearcher:
             collection_name=self.collection_name,
             query_vector=vector,
             query_filter=Filter(**filter_) if filter_ else None,
-            limit=20,
+            limit=150,
         )
 
         seen_name = []
@@ -30,6 +30,7 @@ class NeuralSearcher:
             if name not in seen_name:
                 result = hit.payload
                 result['score'] = hit.score
+                result['ident'] = hit.id
                 results.append(result)
                 seen_name.append(name)
         return results
@@ -39,3 +40,23 @@ class NeuralSearcher:
         # Use an empty string as the query to retrieve all documents
         return self.search(text="", filter_=None)
 
+    def recommend(self, positif: list, negitif: list) -> List[dict]:
+        hits = self.recommend(
+            collection_name = self.collection_name,
+            positive=positif,
+            negative = negitif,
+            limit=15
+        )
+
+        seen_name = []
+        results = []
+
+        for hit in hits:
+            name = hit.payload["name"]
+            if name not in seen_name:
+                result = hit.payload
+                result['score'] = hit.score
+                result['ident'] = hit.id
+                results.append(result)
+                seen_name.append(name)
+        return results
