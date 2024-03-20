@@ -45,20 +45,27 @@ Next, we need to upload the dataset in the vector database and to do that, we go
 Once the code is finally done, we can check if our database exist on the [Qdrant UI](http://localhost:6333/dashboard#/collections) and as we can see, our dataset is complete.
 ![result01](Documents/Images/result01.png) ![result02](Documents/Images/result02.png)
 
-### Test the research
+### Recommendation research
 
 Once the preparation and the uploading of the dataset is complete, we gonna test the search to find similarities between each vectors.
 
 To do that, we're going to run the [service.py](Code/service.py) and when the application start is complete, then run the [index.html](static/index.html). Normally, your gonna land on this site : ![result03](Documents/Images/result03.png)
 
-If we try to search a game, for exemple, Grand Theft Auto, we have this results : ![result04](Documents/Images/result04.png)
+On the homepage, you can search a game title, like the game, dislike it, access to the Recommendation page and the Basket page.
 
---- add rest here
+When you like or dislike a game, it will enter to the Basket page and when you access the Recommendation page, it will show you games based on the liked games, the disliked games and the games that are close to the disliked games will be filthered from the recommendation page. ![result04](Documents/Images/result04.png)
+You can like/dislike a game from the recommendation page and it will added to the Basket page then remove from the recommendation page.
+
+You can access to your liked/disliked games in the Basket page. You can remove them if necessary. ![result05](Documents/Images/result05.png)
+
+If we go back to the Home page and try to search a game, for exemple, Grand Theft Auto, we have this results : ![result06](Documents/Images/result06.png)
+
+As we can see, our research get the closest game base on the vector and the search.
 
 ## Error handling
 We cross against some errors during the development of this project :
 
-1. qdrant_client.http.exceptions.ResponseHandlingException: timed out
+1.  qdrant_client.http.exceptions.ResponseHandlingException: timed out
 
 This error can be solved by adding a timeout, exemple:
 ``
@@ -69,8 +76,10 @@ client = QdrantClient(
 )
 ``
 
-2. AttributeError: module 'httpcore' has no attribute 'CloseError'
+2.  AttributeError: module 'httpcore' has no attribute 'CloseError'
 
 This error is a problem of package, be sure to install the correct version of packages in the requirements (no version = latest version)
 
-3.
+3.  Upload error
+
+We encountered this error during the upload of the payload and the npy. We decided to resolve this error by skipping some rows of the payload.
