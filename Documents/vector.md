@@ -31,4 +31,4 @@ The queryies in the database are done through different similarity measures. It 
 - **Cosine similarity** : The measure will be between -1 and 1. It measures the angle of the 2 or more points from the point of origin. It is mainly use in a text database because if you have a long text and a short one, the long text won't have a bigger impact on the result
 - **Euclidean distance** : Measures the distance between two points from 0 to infinity
 
-![CosineEuclidean](Images/CosineEuclidean.png)
+<img width="300" height="auto" src="Images/CosineEuclidean.png">
