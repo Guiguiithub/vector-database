@@ -1,4 +1,4 @@
-# Vector Database (and AI prompt?)
+# Vector Database
 by Henriques Amaral Guilherme Filipe, Schneider Bastien, Salamin Alexandre
 
 
@@ -8,7 +8,7 @@ This project focuses on developing a high-performance vector database, leveragin
 
 For our project, we decided to do a recommendation of games based on the steam collection until 2019. With Qdrant, it will provide a solution for our project thanks to his rapid and accurate processing.
 
-We will mainly focus on the explanation of how vector database work and compare it to other solution.
+We will mainly focus on the explanation of how vector database work.
 
 You can find [here](Documents/vector.md)  more information for vector database.
 
