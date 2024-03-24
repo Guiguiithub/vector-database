@@ -10,6 +10,8 @@ For our project, we decided to do a recommendation of games based on the steam c
 
 We will mainly focus on the explanation of how vector database work and compare it to other solution.
 
+You can find in [here](Documents/vector.md) for more information for vector database.
+
 ## Step-by-step installation
 You can find the extended version in the [qdrant website](https://qdrant.tech/).
 
