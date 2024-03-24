@@ -1,7 +1,26 @@
 from typing import List
 from qdrant_client import QdrantClient
+from qdrant_client.http import models
 from qdrant_client.http.models.models import Filter
 from sentence_transformers import SentenceTransformer
+
+
+def get_results(hits: list, score: bool):
+    seen_name = []
+    results = []
+
+    for hit in hits:
+        print("here")
+        print(hit)
+        name = hit.payload["name"]
+        if name not in seen_name:
+            result = hit.payload
+            if score:
+                result['score'] = hit.score
+            result['ident'] = hit.id
+            results.append(result)
+            seen_name.append(name)
+    return results
 
 
 class NeuralSearcher:
@@ -21,19 +40,7 @@ class NeuralSearcher:
             limit=150,
         )
 
-        seen_name = []
-        results = []
-
-        # verification of duplicate
-        for hit in hits:
-            name = hit.payload["name"]
-            if name not in seen_name:
-                result = hit.payload
-                result['score'] = hit.score
-                result['ident'] = hit.id
-                results.append(result)
-                seen_name.append(name)
-        return results
+        return get_results(hits, True)
 
     # get all data from database
     def get_all_data(self) -> List[dict]:
@@ -41,22 +48,23 @@ class NeuralSearcher:
         return self.search(text="", filter_=None)
 
     def recommend(self, positif: list, negitif: list) -> List[dict]:
-        hits = self.recommend(
-            collection_name = self.collection_name,
+        hits = self.qdrant_client.recommend(
+            collection_name=self.collection_name,
             positive=positif,
-            negative = negitif,
+            negative=negitif,
             limit=15
         )
 
-        seen_name = []
-        results = []
+        return get_results(hits, True)
 
-        for hit in hits:
-            name = hit.payload["name"]
-            if name not in seen_name:
-                result = hit.payload
-                result['score'] = hit.score
-                result['ident'] = hit.id
-                results.append(result)
-                seen_name.append(name)
-        return results
+    def search_id(self, text: list) -> List[dict]:
+        hits = self.qdrant_client.scroll(
+            collection_name=self.collection_name,
+            scroll_filter=models.Filter(
+                must=[
+                    models.HasIdCondition(has_id=text),
+                ]
+            )
+        )
+
+        return get_results(hits[0], False)

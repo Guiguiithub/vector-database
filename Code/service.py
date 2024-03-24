@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+import json
 
 from api import NeuralSearcher
 
@@ -42,13 +43,28 @@ def all_startup():
 @app.post("/api/recommend")
 def recommend(request: dict):
     try:
-        liked_ids = request.get("likeIds", [])
-        disliked_ids = request.get("dislikeIds", [])
+        rawLike = request.get("likeIds")
+        rawDislike = request.get("dislikeIds")
+
+        liked_ids = json.loads(rawLike)
+        disliked_ids = json.loads(rawDislike)
 
         result = neural_searcher.recommend(positif=liked_ids, negitif=disliked_ids)
         return {"result": result}
     except Exception as e:
         return {"error": str(e)}
+
+@app.post("/api/research")
+def search_id(request: dict):
+    try:
+        rawLike = request.get("search")
+
+        liked_ids = json.loads(rawLike)
+        print(liked_ids)
+        data = neural_searcher.search_id(liked_ids)
+        return {"result": data}
+    except Exception as e:
+        return {"error": e}
 
 if __name__ == "__main__":
     import uvicorn
