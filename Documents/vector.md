@@ -4,7 +4,7 @@
 
 A vector database is a collection of data stored as vectors, which are mathematical representations of data points in a graph. These vectors encode the essential features of the data items in a numerical format, facilitating various computational operations and analyses.
 
-It is commonly used in various cases like recommendation systems, image and video searching and machine learning.
+It is commonly used in various cases like recommendation systems, image/video searching and machine learning.
 
 ![vectorDatabase](Images/VectorDatabase.png)
 
@@ -14,7 +14,9 @@ The database is composed of at least 3 elements:
 
 - Id: A unique identifier assigned to each data item in the database
 - Data: The actual content or item being stored in the database
-- Vector: Numerical representations of the data items, obtained through various machine learning algorithms or mathematical transformations
+- Vector: Numerical representations of the data items, obtained through the use of embedding models (piece of code using various machine learning algorithms to get coherent vectors from items)
+
+<img src="Images/Embeddings.png">
 
 ## Use case
 
@@ -26,7 +28,7 @@ A vector database finds applications in various domains, including:
 
 ## Querying
 
-The queryies in the database are done through different similarity measures. It exists differents measures :
+The queries in the database are done through different similarity measures. There are different measures :
 
 - **Cosine similarity** : The measure will be between -1 and 1. It measures the angle of the 2 or more points from the point of origin. It is mainly use in a text database because if you have a long text and a short one, the long text won't have a bigger impact on the result
 - **Euclidean distance** : Measures the distance between two points from 0 to infinity
