@@ -30,7 +30,7 @@ while start_index < len(vectors):
             vectors=vectors[start_index:end_index],
             payload=payload[start_index:end_index],
             ids=None,  # Vector ids will be assigned automatically
-            batch_size=batch_size,
+            batch_size=batch_size,  # How many rows will be added each upload
         )
         start_index = end_index
     except Exception as e:

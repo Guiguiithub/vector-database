@@ -5,6 +5,7 @@ from qdrant_client.http.models.models import Filter
 from sentence_transformers import SentenceTransformer
 
 
+# get the result in a good format
 def get_results(hits: list, score: bool):
     seen_name = []
     results = []
@@ -47,6 +48,7 @@ class NeuralSearcher:
         # Use an empty string as the query to retrieve all documents
         return self.search(text="", filter_=None)
 
+    # get recommendation based on likes and dislikes
     def recommend(self, positif: list, negitif: list) -> List[dict]:
         hits = self.qdrant_client.recommend(
             collection_name=self.collection_name,
@@ -57,6 +59,7 @@ class NeuralSearcher:
 
         return get_results(hits, True)
 
+    # search a game based on his id
     def search_id(self, text: list) -> List[dict]:
         hits = self.qdrant_client.scroll(
             collection_name=self.collection_name,

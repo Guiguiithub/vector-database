@@ -42,7 +42,7 @@ You can create your own dataset manually by following this [guide](https://qdran
 
 The dataset we choose is the [steam dataset](https://www.kaggle.com/datasets/deepann/80000-steam-games-dataset?resource=download) and it gives us a .csv and a .json. We extract the .json and put it in ``Data/RawData`` then we run the code [datasetPreparation.py](Code/datasetPreparation.py) (make sure to do the necessary path correction). Once the code is finalized, make sure to run the qdrant docker before continuing.
 
-Next, we need to upload the dataset in the vector database and to do that, we gonna run the code [uploadToDb.py](Code/uploadToDb.py).
+Next, we need to upload the dataset in the vector database and to do that, we run the code [uploadToDb.py](Code/uploadToDb.py).
 
 Once the code is finally done, we can check if our database exist on the [Qdrant UI](http://localhost:6333/dashboard#/collections) and as we can see, our dataset is complete.
 ![result01](Documents/Images/result01.png) ![result02](Documents/Images/result02.png)
@@ -85,3 +85,12 @@ This error is a problem of package, be sure to install the correct version of pa
 3.  Upload error
 
 We encountered this error during the upload of the payload and the npy. We decided to resolve this error by skipping some rows of the payload.
+
+## Concrete implementation
+
+In the third semester of our formation at the HES-SO Valais/Wallis, we had a web development course in which we had to create a game as a concrete project. The game we created is called "Neutron Star Explorer" (or NSE for short). 
+
+It is a rhythm game in which you shoot asteroids and is accessible at https://nse-game.ch/.
+One of the options available on this site is to import your own spaceship to play with your personal character (personal name, backstory and spaceship). But, before, the custom captain's head was not defined. So, we decided to use the knowledge accumulated in this project to update NSE.
+
+What is now happening is that the game will call an api with the custom character lore written by the player and, through a qdrant dataset of different captains that each have their own backstory, determine the one closest to the lore to select its face as the captain's head.
